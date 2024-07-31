@@ -12,11 +12,9 @@ inputs:
     default: '8.2'
     type: string
 
-runs: 
+runs:
   using: "composite"
   steps:
-    - run: echo PHP Version ${{ inputs.php-version }} and Unit Version ${{ inputs.phpunit-version }}
-      shell: bash
     - name: Setup PHP Version ${{ inputs.php-version }}
       uses: shivammathur/setup-php@v2
       with:
