@@ -15,6 +15,7 @@ on:
 runs: 
   using: "composite"
   steps:
+    - run: echo PHP Version ${{ inputs.php-version }} and Unit Version ${{ inputs.phpunit-version }}
     - name: Setup PHP Version ${{ inputs.php-version }}
       uses: shivammathur/setup-php@v2
         with:
