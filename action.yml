@@ -4,10 +4,24 @@ inputs:
   phpunit-version: 
     description: 'The version of phpunit which us used'
     required: false
-    default: ''
+    default: '10.1.1'
+    type: string
+  php-version:
+    description: "The version of the php which us used"
+    required: false
+    default: '8.2'
+    type: string
 
 runs:
   using: "composite"
   steps:
-      - run: bash $GITHUB_ACTION_PATH/script.sh ${{ inputs.phpunit-version }}
-        shell: bash
+    - name: Setup PHP Version ${{ inputs.php-version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+    - name: Setup PHPUnit Version ${{ inputs.phpunit-version }}
+      run: wget https://phar.phpunit.de/phpunit-${{ inputs.phpunit-version }}.phar
+      shell: bash
+    - name: Run Test
+      run: php phpunit-${{ inputs.phpunit-version }}.phar tests --configuration tests/phpunit.xml 
+      shell: bash   
