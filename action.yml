@@ -21,8 +21,8 @@ runs:
       shell: bash
     - name: Setup PHP Version ${{ inputs.php-version }}
       uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ inputs.php-version }}
+      with:
+        php-version: ${{ inputs.php-version }}
     - name: Setup PHPUnit Version ${{ inputs.phpunit-version }}
       run: wget https://phar.phpunit.de/phpunit-${{ inputs.phpunit-version }}.phar
       shell: bash
