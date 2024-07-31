@@ -1,14 +1,25 @@
 name: Run Tests
 description: 'Runs phpunit tests uisng the stubs submodule' 
+inputs:
+  phpunit-version: 
+    description: 'The version of phpunit which us used'
+    required: false
+    default: '10.1.1'
+  php-version:
+    description: "The version of the php which us used"
+    required: false
+    default: "8.2"
 
 runs: 
   using: "composite"
   steps:
-    - name: Setup PHP Unit 8.2
+    - name: Setup PHP Version ${{inputs.php-version}}
       uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-    - run: wget https://phar.phpunit.de/phpunit-10.1.1.phar
+          php-version: '${{inputs.php-version}}'
+    - name: Setup PHPUnit Version ${{inputs.phpunit-version}}
+      run: wget https://phar.phpunit.de/phpunit-${{inputs.phpunit-version}}.phar
       shell: bash
-    - run: php phpunit-10.1.1.phar tests --configuration tests/phpunit.xml 
+    - name: Run Test
+      run: php phpunit-${{inputs.phpunit-version}}.phar tests --configuration tests/phpunit.xml 
       shell: bash   
