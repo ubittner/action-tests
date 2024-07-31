@@ -10,16 +10,17 @@ on:
       php-version:
         description: "The version of the php which us used"
         required: false
-        default: "8.2"
+        default: '8.2'
 
 runs: 
   using: "composite"
   steps:
     - run: echo PHP Version ${{ inputs.php-version }} and Unit Version ${{ inputs.phpunit-version }}
+      shell: bash
     - name: Setup PHP Version ${{ inputs.php-version }}
       uses: shivammathur/setup-php@v2
         with:
-          php-version: '${{ inputs.php-version }}'
+          php-version: ${{ inputs.php-version }}
     - name: Setup PHPUnit Version ${{ inputs.phpunit-version }}
       run: wget https://phar.phpunit.de/phpunit-${{ inputs.phpunit-version }}.phar
       shell: bash
