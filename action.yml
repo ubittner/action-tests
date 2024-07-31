@@ -7,10 +7,12 @@ on:
         description: 'The version of phpunit which us used'
         required: false
         default: '10.1.1'
+        type: string
       php-version:
         description: "The version of the php which us used"
         required: false
         default: '8.2'
+        type: string
 
 runs: 
   using: "composite"
